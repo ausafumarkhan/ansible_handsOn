@@ -1,0 +1,20 @@
+---
+- hosts: prod
+  become: true
+  become_user: root
+  tasks:
+        - name: Installation of Httpd
+          yum:
+                name: httpd
+                state: present
+        - name: Creation of index.html
+          copy:
+                content: "Hello Guys, Welcome to Web Server Installation"
+                dest: /var/www/html/index.html
+        - name: Start and Enable the service
+          service:
+                name: httpd
+                state: started
+                enabled: true
+...
+

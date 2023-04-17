@@ -1,0 +1,16 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  vars:
+    data:
+      - user1
+      - user2
+      - user3
+      - user4
+  tasks:
+    - name: "with_item"
+      debug:
+        msg: "{{ item }}"
+      with_items: "{{ data }}"
+...

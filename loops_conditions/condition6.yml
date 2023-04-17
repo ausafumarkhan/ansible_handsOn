@@ -1,0 +1,12 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  tasks:
+    - name: Installaton of postfix
+      yum:
+        name: postfix
+        state: latest
+      loop: "{{ ansible_mounts }}"
+      when: item.mount=="/" and item.size_available > 300000000
+...

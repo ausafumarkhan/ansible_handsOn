@@ -1,0 +1,10 @@
+---
+- hosts: webserver
+  become: true
+  become_user: root
+  tasks:
+        - name: Print various ansible facts
+          debug:
+                msg: >
+                        The default address of {{ansible_fqdn}} is {{ansible_default_ipv4.address}}
+...

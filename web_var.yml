@@ -1,0 +1,39 @@
+---
+- hosts: webserver
+  become: true
+  become_user: root
+  vars:
+        web_pkg: httpd
+        firewall_pkg: firewalld
+        perl_pkg: perl
+        rule: http
+  tasks:
+        - name: Mount the OS media drive
+          command: mount /dev/sr0 /mnt
+        - name: Copy the local repo file
+          copy:
+                src: /home/aukhan/ansible/server.repo
+                dest: /etc/yum.repo.d
+        - name: Insatll package
+          yum:
+                  name:
+                    - "{{web_pkg}}"
+                    - "{{firewall_pkg}}"
+                    - "{{perl_pkg}}"
+                  stat: latest
+        - name: Start & Enable the service http
+          service: 
+                name: "{{web_pkg}}"
+                state: started
+                enabled: true
+        - name: Create web content
+          copy:
+                content: "Welcome to Ansible Automation training"
+                dest: /var/www/html/index.html
+        - name: Open the port for "{{rule}}"
+          firewalld:
+                services: "{{rule}}"
+                state: enabled
+                permanent: true
+                immediate: yes
+...

@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  #become: true
+  #become_user: root
+  tasks:
+    - name: Looping echo message 
+      shell: "echo this is my item:{{ item }}"
+      loop:
+        - one
+        - two
+        - three
+        - four
+        - five
+      register: echo_results
+    - name: show echo_results
+      debug: var=echo_results
+...

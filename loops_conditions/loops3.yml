@@ -1,0 +1,17 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  tasks:
+    - name: User exists
+      user:
+        name: "{{ item.name }}"
+        group: "{{ item.group }}"
+      loop:
+        - name: amit
+          group: India
+        - name: aamir
+          group: pakistan
+        - name: Dilshan
+          group: SriLanka
+...

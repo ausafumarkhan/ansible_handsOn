@@ -1,0 +1,15 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  vars:
+   mail_services:
+     - httpd
+     - vsftpd
+  tasks:
+    - name: Apache and FTP are running 
+      service:
+        name: "{{ item }}"
+        state: started
+      loop: "{{ mail_services }}"
+...

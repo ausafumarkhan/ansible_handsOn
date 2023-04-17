@@ -1,0 +1,11 @@
+---
+- hosts: dev
+  become: true
+  become_user: root
+  tasks:
+    - name: Creation of a user
+      user:
+         name: sam
+         uid: 4042
+         state: present
+...

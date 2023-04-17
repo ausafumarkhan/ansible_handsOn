@@ -1,0 +1,18 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  gather_facts: true
+  vars:
+    distribution:
+      - RedHat
+      - CentOS
+      - Fedora
+      - ubuntu
+  tasks:
+    - name: "Installation of Postfix package"
+      yum:
+        name: postfix
+        state: latest
+      when: ansible_distribution in distribution
+...

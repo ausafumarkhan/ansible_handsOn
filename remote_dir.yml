@@ -1,0 +1,18 @@
+---
+- hosts: webserver
+  become: true
+  become_user: root
+  vars:
+        remote_dir: /etc/ansible/facts.d         # It will be created on client machine
+        facts_file: custom.fact                 # It should be on ansible server from where we are executing the playbook 
+  tasks:
+        - name: Create a remote directory
+          file:
+                state: directory
+                recurse: yes                    # It will create all child and parent directory
+                path: "{{remote_dir}}"
+        - name: Copy a file
+          copy:
+                src: "{{facts_file}}"
+                dest: "{{remote_dir}}"
+...

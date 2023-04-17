@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  tasks: 
+    - name: "Executing the command"
+      command: cat /etc/hosts
+...
+      

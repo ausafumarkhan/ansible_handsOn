@@ -1,0 +1,13 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  vars:
+    myservice: httpd
+  tasks:
+    - name: "{{ myservice }} Installation"
+      yum:
+        name: "{{ myservice }}"
+        state: latest
+      when: ansible_memfree_mb > 1000
+...

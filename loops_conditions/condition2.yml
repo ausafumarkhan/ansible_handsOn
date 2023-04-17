@@ -1,0 +1,12 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  vars:
+    myservice: postfix
+  tasks:
+    - name: Installation of {{ myservice }} packge 
+      yum:
+        name: "{{ myservice }}"
+        state: present
+      when: myservice is defined

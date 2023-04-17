@@ -1,0 +1,13 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  vars:
+    data:
+      - file
+  tasks:
+    - name: "With_Item using File"
+      debug: 
+        msg: "{{ item }}"
+      with_file: "{{ data }}"
+...

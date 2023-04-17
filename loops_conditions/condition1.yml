@@ -1,0 +1,12 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  vars:
+    my_task: true
+  tasks:
+    - name: Postfix Package Installation
+      yum: 
+        name: postfix
+        state: latest
+      when: my_task

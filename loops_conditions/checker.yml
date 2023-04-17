@@ -1,0 +1,15 @@
+---
+- hosts: pub
+  become: true
+  become_user: root
+  tasks:
+   - name: Apache is running 
+     service:
+       name: httpd
+       state: started
+   - name: FTP is running 
+     service:
+       name: vsftpd
+       state: started
+...
+
